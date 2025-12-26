@@ -139,7 +139,7 @@ start_build_process() {
 
     echo "Cloning device stuff..."
     # Device Trees
-    git clone https://github.com/nekoshirro/platform_device_xiaomi_marble.git device/xiaomi/marble -b evox-q1 --depth 1
+    git clone https://github.com/nekoshirro/platform_device_xiaomi_marble.git device/xiaomi/marble -b evox-16 --depth 1
     git clone https://github.com/nekoshirro/platform_device_xiaomi_sm8450-common.git device/xiaomi/sm8450-common --depth 1
 
     # Vendor Trees
