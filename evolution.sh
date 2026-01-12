@@ -157,6 +157,7 @@ start_build_process() {
     git clone https://github.com/Evolution-X-Devices/vendor_xiaomi_miuicamera-marble.git vendor/xiaomi/miuicamera-marble --depth 1
     git clone https://github.com/nekoshirro/android_hardware_xiaomi.git hardware/xiaomi --depth 1
     git clone https://github.com/nekoshirro/android_hardware_dolby.git hardware/dolby --depth 1
+    git clone https://github.com/Evolution-X-Devices/packages_apps_GameBar.git packages/apps/GameBar --depth 1
 
     echo "Tree sync complete."
 
