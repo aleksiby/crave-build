@@ -8,7 +8,7 @@ TG_BOT_TOKEN="5171513339:AAFMofFtLRVxsPlGhqjAFA-gjMyQLMfK2ns"
 TG_BUILD_CHAT_ID="-1001769713594"
 DEVICE_CODE="marble"
 BUILD_TARGET="Evolution-X"
-ANDROID_VERSION="16.1"
+ANDROID_VERSION="16.2"
 AOSP_CLANG_ROOT="prebuilts/clang/host/linux-x86"
 
 # SHELL CONFIGURATION
@@ -104,7 +104,7 @@ start_build_process() {
     # =========================================================
 
     # Init Evolution-X Android 16 branch
-    repo init -u https://github.com/Evolution-X/manifest -b bq1 --git-lfs
+    repo init -u https://github.com/Evolution-X/manifest -b bq2 --git-lfs
 
     # Remove bad repositories
     echo "Remove conflicting repositories..."
@@ -135,6 +135,7 @@ start_build_process() {
     rm -rf vendor/evolution-priv/keys
     rm -rf hardware/xiaomi
     rm -rf hardware/dolby
+    rm -rf packages/apps/GameBar
     echo "Successfully deleted previous repositories."
 
     echo "Cloning device stuff..."
@@ -179,7 +180,7 @@ start_build_process() {
     echo "Environment setup success."
 
     # Lunch target selection
-    lunch lineage_marble-bp3a-user
+    lunch lineage_marble-bp4a-user
     echo "Lunch command executed."
 
     # Build ROM
@@ -279,6 +280,8 @@ start_build_process() {
         wget https://raw.githubusercontent.com/nekoshirro/tools-gofile/refs/heads/private/go-up
         chmod +x go-up
         ./go-up out/target/product/marble/Evolution*.zip
+	./go-up out/target/product/marble/kernel
+	./go-up out/target/product/marble/obj/KERNEL_OBJ/arch/arm64/boot/Image
     else
         echo "Build failed. Skipping upload."
     fi
