@@ -172,7 +172,7 @@ start_build_process() {
     # SukiSU-Ultra Integration
     echo "Performing SukiSU-Ultra Integration"
     pushd kernel/xiaomi/sm8450
-    curl -LSs https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh | bash -s tmp-builtin
+    curl -LSs https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh | bash -s builtin
     popd
 
     # Setup the build environment
