@@ -148,7 +148,7 @@ start_build_process() {
     git clone https://github.com/nekoshirro/platform_vendor_xiaomi_sm8450-common.git vendor/xiaomi/sm8450-common --depth 1
 
     # Kernel & Toolchain
-    git clone https://github.com/nekoshirro/platform_kernel_xiaomi_sm8450.git kernel/xiaomi/sm8450 -b sukisu --depth 1
+    git clone https://github.com/nekoshirro/platform_kernel_xiaomi_sm8450.git kernel/xiaomi/sm8450 -b bka --depth 1
     git clone https://github.com/nekoshirro/platform_kernel_xiaomi_sm8450-devicetrees.git kernel/xiaomi/sm8450-devicetrees --depth 1
     git clone https://github.com/nekoshirro/platform_kernel_xiaomi_sm8450-modules.git kernel/xiaomi/sm8450-modules --depth 1
 #   git clone https://gitlab.com/nekoshirro/Alchemist-LLVM.git prebuilts/clang/host/linux-x86/clang-alchemist -b clang-21-LTO --depth 1
@@ -156,8 +156,8 @@ start_build_process() {
     # Camera/Hardware
     git clone https://github.com/Evolution-X-Devices/device_xiaomi_miuicamera-marble.git device/xiaomi/miuicamera-marble --depth 1
     git clone https://github.com/Evolution-X-Devices/vendor_xiaomi_miuicamera-marble.git vendor/xiaomi/miuicamera-marble --depth 1
-    git clone https://github.com/nekoshirro/android_hardware_xiaomi.git hardware/xiaomi --depth 1
-    git clone https://github.com/nekoshirro/android_hardware_dolby.git hardware/dolby --depth 1
+    git clone https://github.com/Evolution-X-Devices/hardware_xiaomi.git -b bka-no-dolby hardware/xiaomi --depth 1
+    git clone https://github.com/Evolution-X-Devices/hardware_dolby.git -b bka-aospa hardware/dolby --depth 1
     git clone https://github.com/Evolution-X-Devices/packages_apps_GameBar.git packages/apps/GameBar --depth 1
 
     echo "Tree sync complete."
@@ -169,11 +169,11 @@ start_build_process() {
     ./keys.sh
     popd
 
-    # SukiSU-Ultra Integration
-    echo "Performing SukiSU-Ultra Integration"
-    pushd kernel/xiaomi/sm8450
-    curl -LSs https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh | bash -s builtin
-    popd
+#    # SukiSU-Ultra Integration
+#    echo "Performing SukiSU-Ultra Integration"
+#    pushd kernel/xiaomi/sm8450
+#    curl -LSs https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh | bash -s builtin
+#    popd
 
     # Setup the build environment
     . build/envsetup.sh
