@@ -230,9 +230,9 @@ start_build_process() {
     fi
 
     # KernelSU Warning Message to Telegram
-#    if [ -n "$warning_message" ]; then
-#       send_telegram "$TG_BUILD_CHAT_ID" "$warning_message"
-#    fi
+    if [ -n "$warning_message" ]; then
+       send_telegram "$TG_BUILD_CHAT_ID" "$warning_message"
+    fi
 
     # Toolchain Notification
     local CLANG_ALCHEMIST_DIR="$AOSP_CLANG_ROOT/clang-alchemist"
