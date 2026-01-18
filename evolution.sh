@@ -142,7 +142,7 @@ start_build_process() {
     git clone https://github.com/nekoshirro/platform_vendor_xiaomi_sm8450-common.git vendor/xiaomi/sm8450-common --depth 1
 
     # Kernel & Toolchain
-    git clone https://github.com/nekoshirro/platform_kernel_xiaomi_sm8450.git kernel/xiaomi/sm8450 -b bka --depth 1
+    git clone https://github.com/nekoshirro/platform_kernel_xiaomi_sm8450.git kernel/xiaomi/sm8450 -b sukisu --depth 1
     git clone https://github.com/nekoshirro/platform_kernel_xiaomi_sm8450-devicetrees.git kernel/xiaomi/sm8450-devicetrees --depth 1
     git clone https://github.com/nekoshirro/platform_kernel_xiaomi_sm8450-modules.git kernel/xiaomi/sm8450-modules --depth 1
 #   git clone https://gitlab.com/nekoshirro/Alchemist-LLVM.git prebuilts/clang/host/linux-x86/clang-alchemist -b clang-21-LTO --depth 1
@@ -163,11 +163,11 @@ start_build_process() {
     ./keys.sh
     popd
 
-#    # SukiSU-Ultra Integration
-#    echo "Performing SukiSU-Ultra Integration"
-#    pushd kernel/xiaomi/sm8450
-#    curl -LSs https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh | bash -s builtin
-#    popd
+    # SukiSU-Ultra Integration
+    echo "Performing KernelSU-Next Integration..."
+    pushd kernel/xiaomi/sm8450
+    curl -LSs "https://raw.githubusercontent.com/pershoot/KernelSU-Next/refs/heads/next-susfs/kernel/setup.sh" | bash -s dev-susfs
+    popd
 
     # Setup the build environment
     . build/envsetup.sh
@@ -210,7 +210,7 @@ start_build_process() {
 
     # KernelSU Function
     local ksu_warning="⚠️ *This build is using KSU-Next by default!*"
-    local sukisu_warning="⚠️ *This build is using SukiSU-Ultra by default!*"
+    local sukisu_warning="⚠️ *This build is using KernelSU-Next by default!*"
     local non_ksu_warning="🧪 *This build is using Alchemist-LTO+ without KSU-Next by default!*"
     local kernel_dir="kernel/xiaomi/sm8450"
 
