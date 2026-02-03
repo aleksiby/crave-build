@@ -91,7 +91,7 @@ start_build_process() {
     START_TIME=$(date +%s)
 
     # Message for Build Started
-    local initial_msg="⚙️ *ROM Build Started!*
+    local initial_msg="⚙️ *ROM Build Started! (KERNEL ONLY)*
     *ROM:* $BUILD_TARGET
     *Android:* $ANDROID_VERSION
     *Device:* $DEVICE_CODE
@@ -142,7 +142,7 @@ start_build_process() {
     git clone https://github.com/nekoshirro/platform_vendor_xiaomi_sm8450-common.git vendor/xiaomi/sm8450-common --depth 1
 
     # Kernel & Toolchain
-    git clone https://github.com/nekoshirro/platform_kernel_xiaomi_sm8450.git kernel/xiaomi/sm8450 -b sukisu --depth 1
+    git clone https://github.com/nekoshirro/platform_kernel_xiaomi_sm8450.git kernel/xiaomi/sm8450 -b evox-ksun --depth 1
     git clone https://github.com/nekoshirro/platform_kernel_xiaomi_sm8450-devicetrees.git kernel/xiaomi/sm8450-devicetrees --depth 1
     git clone https://github.com/nekoshirro/platform_kernel_xiaomi_sm8450-modules.git kernel/xiaomi/sm8450-modules --depth 1
 #   git clone https://gitlab.com/nekoshirro/Alchemist-LLVM.git prebuilts/clang/host/linux-x86/clang-alchemist -b clang-21-LTO --depth 1
@@ -163,11 +163,11 @@ start_build_process() {
     ./keys.sh
     popd
 
-    # SukiSU-Ultra Integration
-    echo "Performing KernelSU-Next Integration..."
-    pushd kernel/xiaomi/sm8450
-    curl -LSs "https://raw.githubusercontent.com/pershoot/KernelSU-Next/refs/heads/next-susfs/kernel/setup.sh" | bash -s dev-susfs
-    popd
+#    # SukiSU-Ultra Integration
+#    echo "Performing KernelSU-Next Integration..."
+#    pushd kernel/xiaomi/sm8450
+#    curl -LSs "https://raw.githubusercontent.com/pershoot/KernelSU-Next/refs/heads/next-susfs/kernel/setup.sh" | bash -s dev-susfs
+#    popd
 
     # Setup the build environment
     . build/envsetup.sh
@@ -181,7 +181,8 @@ start_build_process() {
     echo "========================="
     echo "Starting ROM Compilation..."
     echo "========================="
-    m evolution -j$(nproc --all)
+    m bootimage
+    m kernel
 
     BUILD_STATUS=$? # Capture exit code immediately
 
@@ -200,7 +201,7 @@ start_build_process() {
     fi
 
     # Final Message with Android Version
-    local final_msg="${status_icon} *Build Finished!*
+    local final_msg="${status_icon} *Build Finished! (KERNEL ONLY)*
     *ROM:* $BUILD_TARGET
     *Android:* $ANDROID_VERSION
     *Device:* $DEVICE_CODE
@@ -230,9 +231,9 @@ start_build_process() {
     fi
 
     # KernelSU Warning Message to Telegram
-    if [ -n "$warning_message" ]; then
-       send_telegram "$TG_BUILD_CHAT_ID" "$warning_message"
-    fi
+#    if [ -n "$warning_message" ]; then
+#       send_telegram "$TG_BUILD_CHAT_ID" "$warning_message"
+#    fi
 
     # Toolchain Notification
     local CLANG_ALCHEMIST_DIR="$AOSP_CLANG_ROOT/clang-alchemist"
@@ -273,7 +274,7 @@ start_build_process() {
         rm -rf go-up*
         wget https://raw.githubusercontent.com/nekoshirro/tools-gofile/refs/heads/private/go-up
         chmod +x go-up
-        ./go-up out/target/product/marble/Evolution*.zip
+#        ./go-up out/target/product/marble/Evolution*.zip
 	./go-up out/target/product/marble/kernel
 	./go-up out/target/product/marble/obj/KERNEL_OBJ/arch/arm64/boot/Image
     else
