@@ -166,6 +166,14 @@ start_build_process() {
     ./keys.sh
     popd
 
+    # White Google Bootanimation
+    pushd vendor/custom/bootanimation
+    rm -rf bootanimation_1080.zip
+    wget https://github.com/AndroidOne-Experience/vendor_aosp/raw/refs/heads/15/bootanimation/bootanimation_white.zip
+    mv bootanimation_white.zip bootanimation_1080.zip
+    ls | grep bootanimation_1080.zip
+    popd
+
 # =========================================================
 # ROOT CONFIGURATION
 # =========================================================
