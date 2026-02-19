@@ -159,6 +159,11 @@ start_build_process() {
 
     echo "Tree sync complete."
 
+    # Add dalvik-heap device configs for 8/12/16 GiB devices
+    pushd frameworks/native/build
+    wget https://raw.githubusercontent.com/Evolution-X/frameworks_native/refs/heads/bq2/build/phone-xhdpi-8192-dalvik-heap.mk
+    popd
+
     # Sign build with custom signing keys from Evolution-X
     git clone https://github.com/Evolution-X/vendor_evolution-priv_keys-template vendor/evolution-priv/keys --depth 1
     chmod +x vendor/evolution-priv/keys/keys.sh
